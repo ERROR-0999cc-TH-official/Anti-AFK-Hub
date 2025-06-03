@@ -5,7 +5,7 @@ local RunService = game:GetService("RunService")
 local player = Players.LocalPlayer
 local PlayerGui = player:WaitForChild("PlayerGui")
 
--- แสดงข้อความหลายรายการ
+
 local notifications = {
     {text = "กำลังเริ่มระบบ", delay = 2},
     {text = "กำลังเปิดใช้งาน Anti-AFK", delay = 5},
@@ -23,16 +23,17 @@ for index, notif in ipairs(notifications) do
         })
     end)
 
-    -- เริ่มจับเวลา 2 วิ ทันทีหลัง "แสดง" ข้อความที่ 2
+    
     if index == 2 then
         task.delay(4, function()
-            -- เริ่มระบบ Anti-AFK
+            
             Players.LocalPlayer.Idled:Connect(function()
                 VirtualUser:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
                 VirtualUser:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
             end)
 
-            --  GUI แสดงสถานะ + ตัวจับเวลา
+
+                
             local AFKGui = Instance.new("ScreenGui")
             AFKGui.Name = "AFKGui"
             AFKGui.ResetOnSpawn = false
@@ -52,7 +53,7 @@ for index, notif in ipairs(notifications) do
             AFKLabel.ZIndex = 10
             AFKLabel.Parent = AFKGui
 
-            -- ตัวจับเวลา
+            
             local startTime = tick()
             RunService.RenderStepped:Connect(function()
                 local elapsed = tick() - startTime
@@ -64,5 +65,5 @@ for index, notif in ipairs(notifications) do
         end)
     end
 
-    task.wait(3) -- รอให้ข้อความแสดงครบก่อนแสดงอันถัดไป
+    task.wait(3)
 end
