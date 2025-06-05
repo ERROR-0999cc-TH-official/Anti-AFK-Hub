@@ -98,7 +98,6 @@ for index, notif in ipairs(notifications) do
 - เพิ่มข้อความสถานะ เวลา
 - เพิ่มระบบ Anti-AFK ต้นแบบ
 - เพิ่มระบบควบคุมการทำงานต่างๆ
-
 ]]
             changelogText.Font = Enum.Font.SourceSans
             changelogText.TextSize = 18
