@@ -155,7 +155,7 @@ for index, notif in ipairs(notifications) do
                 local hours = math.floor(elapsed / 3600)  
                 local minutes = math.floor((elapsed % 3600) / 60)  
                 local seconds = math.floor(elapsed % 60)  
-                AFKLabel.Text = string.format("การป้องกันการ AFK ทำงานอยู่\n%02d:%02d:%02d", hours, minutes, seconds)  
+                AFKLabel.Text = string.format("[ การป้องกันการ AFK ทำงานอยู่ ]\n%02d:%02d:%02d", hours, minutes, seconds)  
             end)  
 
             Players.LocalPlayer.Idled:Connect(function()  
