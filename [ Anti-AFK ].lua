@@ -5,7 +5,7 @@ local RunService = game:GetService("RunService")
 local player = Players.LocalPlayer
 local PlayerGui = player:WaitForChild("PlayerGui")
 
--- แสดงข้อความหลายรายการ
+-- แสดงข้อความแจ้งเตือนลำดับ
 local notifications = {
     {text = "กำลังเริ่มระบบ", delay = 2},
     {text = "กำลังเปิดใช้งาน Anti-AFK", delay = 5},
@@ -18,7 +18,7 @@ for index, notif in ipairs(notifications) do
     task.wait(notif.delay)
     pcall(function()
         game.StarterGui:SetCore("SendNotification", {
-            Title = "[ Anti-AFK-Hud ]",
+            Title = "[ Anti-AFK-Hub ]",
             Text = notif.text,
             Duration = 8
         })
@@ -41,7 +41,6 @@ for index, notif in ipairs(notifications) do
             frame.Draggable = true
             frame.ZIndex = 10
 
-            -- ปุ่ม X
             local closeButton = Instance.new("TextButton", frame)
             closeButton.Text = "X"
             closeButton.Size = UDim2.new(0, 30, 0, 30)
@@ -53,26 +52,25 @@ for index, notif in ipairs(notifications) do
                 changelogGui:Destroy()
             end)
 
-            -- เส้นคั่น
             local line = Instance.new("Frame", frame)
             line.Size = UDim2.new(1, -20, 0, 2)
             line.Position = UDim2.new(0, 10, 0, 40)
             line.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
             line.ZIndex = 10
 
-            -- ข้อความ changelog ที่เลื่อนดูได้
             local scroll = Instance.new("ScrollingFrame", frame)
             scroll.Size = UDim2.new(1, -20, 1, -80)
             scroll.Position = UDim2.new(0, 10, 0, 50)
-            scroll.CanvasSize = UDim2.new(0, 0, 0, 300)
             scroll.ScrollBarThickness = 6
             scroll.BackgroundTransparency = 1
+            scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
             scroll.ZIndex = 10
 
             local changelogText = Instance.new("TextLabel", scroll)
-            changelogText.Size = UDim2.new(1, 0, 0, 300)
+            changelogText.Size = UDim2.new(1, -10, 0, 0)
             changelogText.TextWrapped = true
             changelogText.TextYAlignment = Enum.TextYAlignment.Top
+            changelogText.TextXAlignment = Enum.TextXAlignment.Left
             changelogText.TextColor3 = Color3.fromRGB(255, 255, 255)
             changelogText.Text = [[
 [ อัปเดต V.1.3 ]
@@ -104,7 +102,14 @@ for index, notif in ipairs(notifications) do
             changelogText.BackgroundTransparency = 1
             changelogText.ZIndex = 10
 
-            -- มุมซ้ายบน
+            -- ปรับขนาดข้อความอัตโนมัติตามเนื้อหา
+            task.defer(function()
+                local textHeight = changelogText.TextBounds.Y
+                changelogText.Size = UDim2.new(1, -10, 0, textHeight)
+                scroll.CanvasSize = UDim2.new(0, 0, 0, textHeight)
+            end)
+
+            -- ข้อความมุมบนซ้าย
             local topLeftText = Instance.new("TextLabel", frame)
             topLeftText.Text = "Anti-AFK-Hub V.1.3"
             topLeftText.Font = Enum.Font.SourceSans
@@ -116,7 +121,7 @@ for index, notif in ipairs(notifications) do
             topLeftText.TextXAlignment = Enum.TextXAlignment.Left
             topLeftText.ZIndex = 10
 
-            -- มุมขวาล่าง
+            -- ข้อความมุมล่างขวา
             local bottomRightText = Instance.new("TextLabel", frame)
             bottomRightText.Text = "by [ERROR 0999cc] TH [official]"
             bottomRightText.Font = Enum.Font.SourceSansItalic
@@ -133,7 +138,6 @@ for index, notif in ipairs(notifications) do
     -- เริ่มระบบ Anti-AFK เมื่อถึงข้อความที่ 3
     if index == 3 then
         task.delay(1, function()
-            -- GUI แสดงสถานะ + ตัวจับเวลา
             local AFKGui = Instance.new("ScreenGui")
             AFKGui.Name = "AFKGui"
             AFKGui.ResetOnSpawn = false
@@ -163,7 +167,7 @@ for index, notif in ipairs(notifications) do
                 AFKLabel.Text = string.format("การป้องกันการ AFK ทำงานอยู่\n%02d:%02d:%02d", hours, minutes, seconds)
             end)
 
-            -- เริ่มระบบ Anti-AFK
+            -- ระบบ Anti-AFK
             Players.LocalPlayer.Idled:Connect(function()
                 VirtualUser:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
                 VirtualUser:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
