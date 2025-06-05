@@ -67,7 +67,7 @@ for index, notif in ipairs(notifications) do
             scroll.ZIndex = 10  
 
             local changelogText = Instance.new("TextLabel", scroll)  
-            changelogText.Size = UDim2.new(1, 0, 0, 9000)  
+            changelogText.Size = UDim2.new(1, 0, 1000)  
             changelogText.TextWrapped = true  
             changelogText.TextYAlignment = Enum.TextYAlignment.Top  
             changelogText.TextColor3 = Color3.fromRGB(255, 255, 255)  
