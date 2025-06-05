@@ -149,13 +149,15 @@ for index, notif in ipairs(notifications) do
             AFKLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
             AFKLabel.BackgroundTransparency = 1
             AFKLabel.Size = UDim2.new(0, 300, 0, 40)
-            AFKLabel.AnchorPoint = Vector2.new(1, 0)
             AFKLabel.Position = UDim2.new(1, -10, 0, 10)
             AFKLabel.TextScaled = true
             AFKLabel.TextYAlignment = Enum.TextYAlignment.Center
             AFKLabel.TextXAlignment = Enum.TextXAlignment.Center
             AFKLabel.ZIndex = 10
             AFKLabel.Parent = AFKGui
+
+            AFKLabel.Active = true
+            AFKLabel.Draggable = true
 
             -- ตัวจับเวลา
             local startTime = tick()
