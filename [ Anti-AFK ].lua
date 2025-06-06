@@ -1,17 +1,54 @@
 local Players = game:GetService("Players")
 local VirtualUser = game:GetService("VirtualUser")
 local RunService = game:GetService("RunService")
-
+local Lighting = game:GetService("Lighting")
 local player = Players.LocalPlayer
 local PlayerGui = player:WaitForChild("PlayerGui")
+
+local function optimizeClient()
+    -- ปิดแสงเงา
+    Lighting.GlobalShadows = false
+    pcall(function()
+        Lighting.Technology = Enum.Technology.Compatibility
+    end)
+    Lighting.Brightness = 1
+    Lighting.ClockTime = 14
+    Lighting.FogStart = 0
+    Lighting.FogEnd = 1e6
+    Lighting.FogColor = Color3.new(1, 1, 1)
+
+    -- ลบ PostEffects
+    for _, v in pairs(Lighting:GetChildren()) do
+        if v:IsA("PostEffect") then
+            v:Destroy()
+        end
+    end
+
+    -- ปิด Particle/Beam/Trail
+    local function disableEffectsInDescendants(parent)
+        for _, obj in ipairs(parent:GetDescendants()) do
+            if obj:IsA("ParticleEmitter") or obj:IsA("Beam") or obj:IsA("Trail") then
+                obj.Enabled = false
+            end
+        end
+    end
+
+    disableEffectsInDescendants(workspace)
+
+    workspace.DescendantAdded:Connect(function(obj)
+        if obj:IsA("ParticleEmitter") or obj:IsA("Beam") or obj:IsA("Trail") then
+            obj.Enabled = false
+        end
+    end)
+end
 
 -- แสดงข้อความหลายรายการ
 local notifications = {
     {text = "กำลังเริ่มระบบ", delay = 2},
-    {text = "กำลังเปิดใช้งาน Anti-AFK", delay = 5},
-    {text = "เปิดใช้งาน Anti-AFK เสร็จสิ้น", delay = 1},
+    {text = "กำลังโหลด script", delay = 5},
+    {text = "โหลด script เสร็จสิ้น", delay = 1},
     {text = "ระบบ by [ERROR 0999cc] TH [official]", delay = 2},
-    {text = "Anti-AFK-Hub V.1.3", delay = 3},
+    {text = "Anti-AFK-Hub V.1.4", delay = 3},
 }
 
 for index, notif in ipairs(notifications) do
@@ -72,6 +109,11 @@ for index, notif in ipairs(notifications) do
             changelogText.TextYAlignment = Enum.TextYAlignment.Top  
             changelogText.TextColor3 = Color3.fromRGB(255, 255, 255)  
             changelogText.Text = [[
+[ อัปเดท V.1.4 ]
+- อัปเดตเวอร์ชั่นเป็น V.1.4
+- เพิ่มการปิด เอฟเฟค และแสงเงาต่างๆ ภายในเกม \nเพื่อเพิ่มประสิทธิภาพการทำงาน และลดความร้อนจาก CPU , GPU ลง
+- แก่ไขข้อผิดพลาดที่พบ
+
 [ อัปเดต V.1.3 ]
 - อัปเดตเวอร์ชั่นเป็น V.1.3
 - ปรับปรุงการป้องกันการ AFK ให้แม่นยำยิ่งขึ้น
@@ -102,7 +144,7 @@ for index, notif in ipairs(notifications) do
             changelogText.ZIndex = 10  
 
             local topLeftText = Instance.new("TextLabel", frame)  
-            topLeftText.Text = "Anti-AFK-Hub V.1.3"  
+            topLeftText.Text = "Anti-AFK-Hub V.1.4"  
             topLeftText.Font = Enum.Font.SourceSans  
             topLeftText.TextSize = 14  
             topLeftText.TextColor3 = Color3.fromRGB(180, 180, 180)  
@@ -123,46 +165,50 @@ for index, notif in ipairs(notifications) do
             bottomRightText.TextXAlignment = Enum.TextXAlignment.Right  
             bottomRightText.ZIndex = 10  
         end)  
-    end  
+    end
 
-    -- เริ่มระบบ Anti-AFK เมื่อถึงข้อความที่ 3  
-    if index == 3 then  
-        task.delay(1, function()  
-            local AFKGui = Instance.new("ScreenGui")  
-            AFKGui.Name = "AFKGui"  
-            AFKGui.ResetOnSpawn = false  
-            AFKGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling  
-            AFKGui.Parent = PlayerGui  
+    -- เริ่มระบบ Anti-AFK + Optimize Client หลังข้อความที่ 3
+    if index == 3 then
+        task.delay(1, function()
+            -- เรียกใช้การปิดเอฟเฟกต์
+            optimizeClient()
 
-            local AFKLabel = Instance.new("TextLabel")  
-            AFKLabel.Text = "[ การป้องกันการ AFK ทำงานอยู่ ]\n00:00:00"  
-            AFKLabel.TextColor3 = Color3.fromRGB(255, 255, 255)  
-            AFKLabel.BackgroundTransparency = 1  
-            AFKLabel.Size = UDim2.new(0, 300, 0, 40)  
-            AFKLabel.AnchorPoint = Vector2.new(1, 0)  
-            AFKLabel.Position = UDim2.new(1, -10, 0, 10)  
-            AFKLabel.TextScaled = true  
-            AFKLabel.TextYAlignment = Enum.TextYAlignment.Center  
-            AFKLabel.TextXAlignment = Enum.TextXAlignment.Center  
-            AFKLabel.ZIndex = 10  
+            local AFKGui = Instance.new("ScreenGui")
+            AFKGui.Name = "AFKGui"
+            AFKGui.ResetOnSpawn = false
+            AFKGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+            AFKGui.Parent = PlayerGui
+
+            local AFKLabel = Instance.new("TextLabel")
+            AFKLabel.Text = "[ การป้องกันการ AFK ทำงานอยู่ ]\n00:00:00"
+            AFKLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            AFKLabel.BackgroundTransparency = 1
+            AFKLabel.Size = UDim2.new(0, 300, 0, 40)
+            AFKLabel.AnchorPoint = Vector2.new(1, 0)
+            AFKLabel.Position = UDim2.new(1, -10, 0, 10)
+            AFKLabel.TextScaled = true
+            AFKLabel.TextYAlignment = Enum.TextYAlignment.Center
+            AFKLabel.TextXAlignment = Enum.TextXAlignment.Center
+            AFKLabel.ZIndex = 10
             AFKLabel.Active = true
             AFKLabel.Draggable = true
-            AFKLabel.Parent = AFKGui  
+            AFKLabel.Parent = AFKGui
 
-            local startTime = tick()  
-            RunService.RenderStepped:Connect(function()  
-                local elapsed = tick() - startTime  
-                local hours = math.floor(elapsed / 3600)  
-                local minutes = math.floor((elapsed % 3600) / 60)  
-                local seconds = math.floor(elapsed % 60)  
-                AFKLabel.Text = string.format("[ การป้องกันการ AFK ทำงานอยู่ ]\n%02d:%02d:%02d", hours, minutes, seconds)  
-            end)  
+            local startTime = tick()
+            RunService.RenderStepped:Connect(function()
+                local elapsed = tick() - startTime
+                local hours = math.floor(elapsed / 3600)
+                local minutes = math.floor((elapsed % 3600) / 60)
+                local seconds = math.floor(elapsed % 60)
+                AFKLabel.Text = string.format("[ การป้องกันการ AFK ทำงานอยู่ ]\n%02d:%02d:%02d", hours, minutes, seconds)
+            end)
 
-            Players.LocalPlayer.Idled:Connect(function()  
-                VirtualUser:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)  
-                VirtualUser:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)  
-            end)  
-        end)  
-    end  
+            Players.LocalPlayer.Idled:Connect(function()
+                VirtualUser:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+                VirtualUser:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+            end)
+        end)
+    end
+
     task.wait(3)
 end
