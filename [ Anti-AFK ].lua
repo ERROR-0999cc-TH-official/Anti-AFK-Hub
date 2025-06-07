@@ -48,12 +48,12 @@ for index, notif in ipairs(notifications) do
 		game.StarterGui:SetCore("SendNotification", {  
 			Title = "[ Anti-AFK-Hud ]",  
 			Text = notif.text,  
-			Duration = 1
+			Duration = 8
 		})  
 	end)  
 
 	if index == 1 then    
-		task.delay(2, function()    
+		task.delay(4, function()    
 			changelogGui = Instance.new("ScreenGui", PlayerGui)    
 			changelogGui.Name = "ChangelogGui"    
 			changelogGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling    
