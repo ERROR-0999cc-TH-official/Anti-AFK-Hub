@@ -35,10 +35,10 @@ end
 -- แสดงข้อความหลายรายการ  
 local notifications = {  
     {text = "กำลังเริ่มระบบ", delay = 2},  
-    {text = "กำลังโหลด script", delay = 5},  
+    {text = "กำลังโหลด script", delay = 2},  
     {text = "โหลด script เสร็จสิ้น", delay = 1},  
     {text = "ระบบ by [ERROR 0999cc] TH [official]", delay = 2},  
-    {text = "Anti-AFK-Hub V.1.4", delay = 3},  
+    {text = "Anti-AFK-Hub V.1.4", delay = 2},  
 }  
   
 local changelogGui -- ตัวแปรเก็บหน้าต่าง changelog  
