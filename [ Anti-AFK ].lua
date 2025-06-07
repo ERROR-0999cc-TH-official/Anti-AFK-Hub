@@ -33,8 +33,7 @@ end
 local notifications = {  
 	{text = "กำลังเริ่มระบบ", delay = 2},  
 	{text = "กำลังโหลด script", delay = 5},  
-	{text = "โหลด script เสร็จสิ้น", delay = 1},  
-	{text = "ระบบ by [ERROR 0999cc] TH [official]", delay = 2},  
+	{text = "โหลด script เสร็จสิ้น", delay = 1},   
 	{text = "Anti-AFK-Hub V.1.4", delay = 3},  
 }  
 
@@ -53,7 +52,7 @@ for index, notif in ipairs(notifications) do
 	end)  
 
 	if index == 1 then    
-		task.delay(6, function()    
+		task.delay(10, function()    
 			changelogGui = Instance.new("ScreenGui", PlayerGui)    
 			changelogGui.Name = "ChangelogGui"    
 			changelogGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling    
