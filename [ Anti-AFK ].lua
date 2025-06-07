@@ -18,7 +18,7 @@ local function optimizeClient()
     pcall(function()
         Lighting.Technology = Enum.Technology.Compatibility
     end)
-    Lighting.Brightness = 1
+    Lighting.Brightness = 5
     Lighting.ClockTime = 12
     Lighting.FogStart = 0
     Lighting.FogEnd = 1e6
