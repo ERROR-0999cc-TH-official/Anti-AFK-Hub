@@ -31,7 +31,7 @@ local function optimizeClient()
 end  
 
 local notifications = {    
-	{text = "กำลังโหลด script", delay = 5},  
+	{text = "กำลังโหลด script", delay = 2},  
 	{text = "โหลด script เสร็จสิ้น", delay = 1},   
 	{text = "Anti-AFK-Hub V.1.4", delay = 3},  
 }  
