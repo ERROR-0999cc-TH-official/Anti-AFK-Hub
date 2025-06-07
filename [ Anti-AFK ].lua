@@ -236,5 +236,5 @@ for index, notif in ipairs(notifications) do
 		end)  
 	end  
 
-	task.wait(3)  
+	task.wait(1)  
 end
