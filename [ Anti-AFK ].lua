@@ -19,7 +19,7 @@ local function optimizeClient()
         Lighting.Technology = Enum.Technology.Compatibility
     end)
     Lighting.Brightness = 1
-    Lighting.ClockTime = 14
+    Lighting.ClockTime = 12
     Lighting.FogStart = 0
     Lighting.FogEnd = 1e6
     Lighting.FogColor = Color3.new(1, 1, 1)
