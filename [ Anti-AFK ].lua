@@ -32,8 +32,6 @@ local function optimizeClient()
     end
 end
 
-local stopScript = false -- flag หยุดสคริปต์
-
 -- แสดงข้อความหลายรายการ
 local notifications = {
     {text = "กำลังเริ่มระบบ", delay = 2},
@@ -45,7 +43,6 @@ local notifications = {
 
 for index, notif in ipairs(notifications) do
     task.wait(notif.delay)
-    if stopScript then break end
     pcall(function()
         game.StarterGui:SetCore("SendNotification", {
             Title = "[ Anti-AFK-Hud ]",
@@ -57,7 +54,6 @@ for index, notif in ipairs(notifications) do
     -- แสดง GUI changelog หลังข้อความแรกเสร็จ 2 วินาที  
     if index == 1 then  
         task.delay(2, function()  
-            if stopScript then return end
             local changelogGui = Instance.new("ScreenGui", PlayerGui)  
             changelogGui.Name = "ChangelogGui"  
             changelogGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling  
@@ -81,64 +77,9 @@ for index, notif in ipairs(notifications) do
             closeButton.TextColor3 = Color3.new(1, 1, 1)  
             closeButton.ZIndex = 10  
             addCorner(closeButton)
-
-            -- ฟังก์ชันแสดงกล่องยืนยันปิด
-            closeButton.MouseButton1Click:Connect(function()
-                if stopScript then return end
-                -- สร้างกล่องยืนยัน
-                local confirmFrame = Instance.new("Frame", changelogGui)
-                confirmFrame.Size = UDim2.new(0, 150, 0, 100)
-                confirmFrame.Position = UDim2.new(0.5, -75, 0.5, -50)
-                confirmFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-                confirmFrame.ZIndex = 20
-                confirmFrame.Active = true
-                confirmFrame.Draggable = false
-                addCorner(confirmFrame, 10)
-
-                local confirmText = Instance.new("TextLabel", confirmFrame)
-                confirmText.Size = UDim2.new(1, -20, 0, 50)
-                confirmText.Position = UDim2.new(0, 10, 0, 10)
-                confirmText.BackgroundTransparency = 1
-                confirmText.TextColor3 = Color3.new(1, 1, 1)
-                confirmText.Text = "คุณต้องการที่จะปิดใช่ไหม"
-                confirmText.TextWrapped = true
-                confirmText.Font = Enum.Font.SourceSans
-                confirmText.TextSize = 16
-                confirmText.TextYAlignment = Enum.TextYAlignment.Center
-                confirmText.ZIndex = 21
-
-                local cancelBtn = Instance.new("TextButton", confirmFrame)
-                cancelBtn.Size = UDim2.new(0.45, 0, 0, 30)
-                cancelBtn.Position = UDim2.new(0.05, 0, 1, -40)
-                cancelBtn.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-                cancelBtn.TextColor3 = Color3.new(1, 1, 1)
-                cancelBtn.Text = "ยกเลิก"
-                addCorner(cancelBtn, 6)
-                cancelBtn.ZIndex = 21
-
-                local okBtn = Instance.new("TextButton", confirmFrame)
-                okBtn.Size = UDim2.new(0.45, 0, 0, 30)
-                okBtn.Position = UDim2.new(0.5, 0, 1, -40)
-                okBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
-                okBtn.TextColor3 = Color3.new(1, 1, 1)
-                okBtn.Text = "ตกลง"
-                addCorner(okBtn, 6)
-                okBtn.ZIndex = 21
-
-                cancelBtn.MouseButton1Click:Connect(function()
-                    confirmFrame:Destroy()
-                end)
-
-                okBtn.MouseButton1Click:Connect(function()
-                    stopScript = true
-                    confirmFrame:Destroy()
-                    changelogGui:Destroy()
-                    local afkGui = PlayerGui:FindFirstChild("AFKGui")
-                    if afkGui then
-                        afkGui:Destroy()
-                    end
-                end)
-            end)
+            closeButton.MouseButton1Click:Connect(function()  
+                changelogGui:Destroy()  
+            end)  
 
             local line = Instance.new("Frame", frame)  
             line.Size = UDim2.new(1, -20, 0, 2)  
@@ -227,7 +168,6 @@ for index, notif in ipairs(notifications) do
     -- เริ่มระบบ Anti-AFK + Optimize Client หลังข้อความที่ 3
     if index == 3 then
         task.delay(1, function()
-            if stopScript then return end
             -- เรียกใช้การปรับแสง
             optimizeClient()
 
@@ -256,7 +196,6 @@ for index, notif in ipairs(notifications) do
 
             local startTime = tick()
             RunService.RenderStepped:Connect(function()
-                if stopScript then return end
                 local elapsed = tick() - startTime
                 local hours = math.floor(elapsed / 3600)
                 local minutes = math.floor((elapsed % 3600) / 60)
@@ -265,7 +204,6 @@ for index, notif in ipairs(notifications) do
             end)
 
             Players.LocalPlayer.Idled:Connect(function()
-                if stopScript then return end
                 VirtualUser:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
                 VirtualUser:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
             end)
