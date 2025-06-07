@@ -30,8 +30,7 @@ local function optimizeClient()
 	end  
 end  
 
-local notifications = {  
-	{text = "กำลังเริ่มระบบ", delay = 2},  
+local notifications = {    
 	{text = "กำลังโหลด script", delay = 5},  
 	{text = "โหลด script เสร็จสิ้น", delay = 1},   
 	{text = "Anti-AFK-Hub V.1.4", delay = 3},  
@@ -52,7 +51,7 @@ for index, notif in ipairs(notifications) do
 	end)  
 
 	if index == 1 then    
-		task.delay(10, function()    
+		task.delay(6, function()    
 			changelogGui = Instance.new("ScreenGui", PlayerGui)    
 			changelogGui.Name = "ChangelogGui"    
 			changelogGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling    
@@ -192,7 +191,7 @@ for index, notif in ipairs(notifications) do
 		end)    
 	end  
 
-	if index == 3 then  
+	if index == 2 then  
 		task.delay(1, function()  
 			optimizeClient()  
 
