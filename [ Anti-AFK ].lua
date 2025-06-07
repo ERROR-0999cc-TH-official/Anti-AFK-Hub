@@ -180,7 +180,7 @@ for index, notif in ipairs(notifications) do
             local AFKLabel = Instance.new("TextLabel")
             AFKLabel.Text = "[ การป้องกันการ AFK ทำงานอยู่ ]\n00:00:00"
             AFKLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-            AFKLabel.BackgroundTransparency = 0.3
+            AFKLabel.BackgroundTransparency = 1
             AFKLabel.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
             AFKLabel.Size = UDim2.new(0, 300, 0, 40)
             AFKLabel.AnchorPoint = Vector2.new(1, 0)
