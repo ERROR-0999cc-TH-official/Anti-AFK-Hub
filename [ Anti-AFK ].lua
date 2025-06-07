@@ -48,7 +48,7 @@ for index, notif in ipairs(notifications) do
 		game.StarterGui:SetCore("SendNotification", {  
 			Title = "[ Anti-AFK-Hud ]",  
 			Text = notif.text,  
-			Duration = 8  
+			Duration = 1
 		})  
 	end)  
 
