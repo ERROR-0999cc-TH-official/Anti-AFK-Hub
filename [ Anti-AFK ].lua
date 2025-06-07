@@ -53,7 +53,7 @@ for index, notif in ipairs(notifications) do
 	end)  
 
 	if index == 1 then    
-		task.delay(4, function()    
+		task.delay(6, function()    
 			changelogGui = Instance.new("ScreenGui", PlayerGui)    
 			changelogGui.Name = "ChangelogGui"    
 			changelogGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling    
