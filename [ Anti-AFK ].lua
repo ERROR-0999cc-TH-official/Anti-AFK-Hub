@@ -1,4 +1,4 @@
-local Players = game:GetService("Players")  
+local Players = game:GetService("Players") 
 local VirtualUser = game:GetService("VirtualUser")  
 local RunService = game:GetService("RunService")  
 local Lighting = game:GetService("Lighting")  
@@ -51,7 +51,7 @@ for index, notif in ipairs(notifications) do
 	end)  
 
 	if index == 1 then    
-		task.delay(6, function()    
+		task.delay(2, function()    
 			changelogGui = Instance.new("ScreenGui", PlayerGui)    
 			changelogGui.Name = "ChangelogGui"    
 			changelogGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling    
