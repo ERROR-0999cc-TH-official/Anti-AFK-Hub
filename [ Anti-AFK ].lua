@@ -76,35 +76,104 @@ for index, notif in ipairs(notifications) do
 			closeButton.TextColor3 = Color3.new(1, 1, 1)    
 			closeButton.ZIndex = 10    
 			addCorner(closeButton)  
-			closeButton.MouseButton1Click:Connect(function()
-    -- ทำลาย changelogGui
-    if changelogGui and changelogGui.Parent then
-        changelogGui:Destroy()
-    end
+			local function addCorner(instance, radius)
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0, radius or 8)
+	corner.Parent = instance
+end
 
-    -- ทำลาย toggleButtonGui
-    if toggleButtonGui and toggleButtonGui.Parent then
-        toggleButtonGui:Destroy()
-    end
+closeButton.MouseButton1Click:Connect(function()
+	-- ป้องกันเปิดซ้ำ
+	if PlayerGui:FindFirstChild("ConfirmCloseGui") then return end
 
-    -- ทำลาย AFKGui
-    local AFKGui = PlayerGui:FindFirstChild("AFKGui")
-    if AFKGui then
-        AFKGui:Destroy()
-    end
+	local confirmGui = Instance.new("ScreenGui")
+	confirmGui.Name = "ConfirmCloseGui"
+	confirmGui.ResetOnSpawn = false
+	confirmGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	confirmGui.Parent = PlayerGui
 
-    -- คืนค่าแสงกลับค่าเริ่มต้น
-    Lighting.GlobalShadows = true
-    pcall(function()
-        Lighting.Technology = Enum.Technology.Default
-    end)
-    Lighting.Brightness = 2
-    Lighting.ClockTime = 14
-    Lighting.FogStart = 0
-    Lighting.FogEnd = 1000
-    Lighting.FogColor = Color3.new(0.7, 0.7, 0.7)
+	-- กล่องหลัก
+	local frame = Instance.new("Frame")
+	frame.Size = UDim2.new(0, 250, 0, 120)
+	frame.Position = UDim2.new(0.5, -125, 0.5, -60)
+	frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	frame.BorderSizePixel = 0
+	frame.Parent = confirmGui
+	addCorner(frame, 12)
+
+	-- ข้อความ
+	local label = Instance.new("TextLabel")
+	label.Size = UDim2.new(1, -20, 0.5, 0)
+	label.Position = UDim2.new(0, 10, 0, 10)
+	label.BackgroundTransparency = 1
+	label.Text = "คุณต้องการที่จะปิดใช้งานใช่ไหม"
+	label.TextColor3 = Color3.new(1, 1, 1)
+	label.Font = Enum.Font.SourceSansBold
+	label.TextSize = 18
+	label.TextWrapped = true
+	label.Parent = frame
+
+	-- ปุ่มตกลง
+	local okBtn = Instance.new("TextButton")
+	okBtn.Size = UDim2.new(0.5, -10, 0.3, 0)
+	okBtn.Position = UDim2.new(0, 10, 0.6, 0)
+	okBtn.Text = "ตกลง"
+	okBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+	okBtn.TextColor3 = Color3.new(1, 1, 1)
+	okBtn.Font = Enum.Font.SourceSans
+	okBtn.TextSize = 16
+	okBtn.Parent = frame
+	addCorner(okBtn, 8)
+
+	-- ปุ่มยกเลิก
+	local cancelBtn = Instance.new("TextButton")
+	cancelBtn.Size = UDim2.new(0.5, -10, 0.3, 0)
+	cancelBtn.Position = UDim2.new(0.5, 0, 0.6, 0)
+	cancelBtn.Text = "ยกเลิก"
+	cancelBtn.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+	cancelBtn.TextColor3 = Color3.new(1, 1, 1)
+	cancelBtn.Font = Enum.Font.SourceSans
+	cancelBtn.TextSize = 16
+	cancelBtn.Parent = frame
+	addCorner(cancelBtn, 8)
+
+	-- การคลิกยกเลิก
+	cancelBtn.MouseButton1Click:Connect(function()
+		confirmGui:Destroy()
+	end)
+
+	-- การคลิกตกลง
+	okBtn.MouseButton1Click:Connect(function()
+		confirmGui:Destroy()
+
+		-- ทำลาย changelogGui
+		if changelogGui and changelogGui.Parent then
+			changelogGui:Destroy()
+		end
+
+		-- ทำลาย toggleButtonGui
+		if toggleButtonGui and toggleButtonGui.Parent then
+			toggleButtonGui:Destroy()
+		end
+
+		-- ทำลาย AFKGui
+		local AFKGui = PlayerGui:FindFirstChild("AFKGui")
+		if AFKGui then
+			AFKGui:Destroy()
+		end
+
+		-- คืนค่าแสงกลับค่าเริ่มต้น
+		Lighting.GlobalShadows = true
+		pcall(function()
+			Lighting.Technology = Enum.Technology.Default
+		end)
+		Lighting.Brightness = 2
+		Lighting.ClockTime = 14
+		Lighting.FogStart = 0
+		Lighting.FogEnd = 1000
+		Lighting.FogColor = Color3.new(0.7, 0.7, 0.7)
+	end)
 end)
-
 
 			local line = Instance.new("Frame", frame)    
 			line.Size = UDim2.new(1, -20, 0, 2)    
