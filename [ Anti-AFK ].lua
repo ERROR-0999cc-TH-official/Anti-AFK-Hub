@@ -290,7 +290,7 @@ end)
         stroke.Thickness = 2
         stroke.Transparency = 0 -- ทึบ 100%
         stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-        stroke.Parent = frame
+        stroke.Parent = toggleButton
 						
 				toggleButton.MouseButton1Click:Connect(function()  
 					if changelogGui then  
