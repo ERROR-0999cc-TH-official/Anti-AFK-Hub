@@ -99,6 +99,8 @@ closeButton.MouseButton1Click:Connect(function()
 	frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 	frame.BorderSizePixel = 0
 	frame.Parent = confirmGui
+	frame.Active = true  
+	frame.Draggable = true  					
 	addCorner(frame, 12)
 
 	-- ข้อความ
@@ -115,7 +117,7 @@ closeButton.MouseButton1Click:Connect(function()
 
 	-- ปุ่มตกลง
 	local okBtn = Instance.new("TextButton")
-	okBtn.Size = UDim2.new(0.5, -10, 0.3, 0)
+	okBtn.Size = UDim2.new(0.4, -10, 0.3, 0)
 	okBtn.Position = UDim2.new(0, 10, 0.6, 0)
 	okBtn.Text = "ตกลง"
 	okBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
@@ -127,7 +129,7 @@ closeButton.MouseButton1Click:Connect(function()
 
 	-- ปุ่มยกเลิก
 	local cancelBtn = Instance.new("TextButton")
-	cancelBtn.Size = UDim2.new(0.5, -10, 0.3, 0)
+	cancelBtn.Size = UDim2.new(0.4, -10, 0.3, 0)
 	cancelBtn.Position = UDim2.new(0.5, 0, 0.6, 0)
 	cancelBtn.Text = "ยกเลิก"
 	cancelBtn.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
