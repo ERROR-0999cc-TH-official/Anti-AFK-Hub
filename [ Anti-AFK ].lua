@@ -77,24 +77,31 @@ for index, notif in ipairs(notifications) do
 			closeButton.ZIndex = 10    
 			addCorner(closeButton)  
 			closeButton.MouseButton1Click:Connect(function()
-	-- ซ่อน GUI ทั้งหมด
-	if changelogGui then changelogGui.Enabled = false end
-	if toggleButtonGui then toggleButtonGui.Enabled = false end
-	local afkGui = PlayerGui:FindFirstChild("AFKGui")
-	if afkGui then afkGui.Enabled = false end
+    -- ซ่อน changelogGui
+    changelogGui.Enabled = false
 
-	-- คืนค่า Lighting เป็นค่าเริ่มต้น
-	Lighting.GlobalShadows = true
-	pcall(function()
-		Lighting.Technology = Enum.Technology.Future
-	end)
-	Lighting.Brightness = 2
-	Lighting.ClockTime = 14
-	Lighting.FogStart = 0
-	Lighting.FogEnd = 100000
-	Lighting.FogColor = Color3.fromRGB(192, 192, 192)
+    -- ซ่อน toggleButtonGui
+    if toggleButtonGui then
+        toggleButtonGui.Enabled = false
+    end
+
+    -- ซ่อน AFKGui และ label
+    local AFKGui = PlayerGui:FindFirstChild("AFKGui")
+    if AFKGui then
+        AFKGui.Enabled = false
+    end
+
+    -- คืนค่าแสงกลับค่าเริ่มต้น
+    Lighting.GlobalShadows = true
+    pcall(function()
+        Lighting.Technology = Enum.Technology.Default
+    end)
+    Lighting.Brightness = 2
+    Lighting.ClockTime = 14
+    Lighting.FogStart = 0
+    Lighting.FogEnd = 1000
+    Lighting.FogColor = Color3.new(0.7, 0.7, 0.7)
 end)
-
 
 			local line = Instance.new("Frame", frame)    
 			line.Size = UDim2.new(1, -20, 0, 2)    
