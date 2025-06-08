@@ -76,14 +76,7 @@ for index, notif in ipairs(notifications) do
 			closeButton.TextColor3 = Color3.new(1, 1, 1)    
 			closeButton.ZIndex = 10    
 			addCorner(closeButton)  
-			local function addCorner(instance, radius)
-	local corner = Instance.new("UICorner")
-	corner.CornerRadius = UDim.new(0, radius or 8)
-	corner.Parent = instance
-end
-
-closeButton.MouseButton1Click:Connect(function()
-	-- ป้องกันเปิดซ้ำ
+			closeButton.MouseButton1Click:Connect(function()
 	if PlayerGui:FindFirstChild("ConfirmCloseGui") then return end
 
 	local confirmGui = Instance.new("ScreenGui")
@@ -92,52 +85,54 @@ closeButton.MouseButton1Click:Connect(function()
 	confirmGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	confirmGui.Parent = PlayerGui
 
-	-- กล่องหลัก
+	-- กล่องหลัก (ขนาดใหญ่ขึ้น 2 เท่า)
 	local frame = Instance.new("Frame")
-	frame.Size = UDim2.new(0, 250, 0, 120)
-	frame.Position = UDim2.new(0.5, -200, 0.5, -150)
-	frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	frame.Size = UDim2.new(0, 500, 0, 240)
+	frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+	frame.AnchorPoint = Vector2.new(0.5, 0.5)
+	frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 	frame.BorderSizePixel = 0
 	frame.Parent = confirmGui
-	frame.Active = true  
-	frame.Draggable = true  					
-	addCorner(frame, 12)
+	frame.Active = true
+	frame.Draggable = true
+	addCorner(frame, 16)
 
 	-- ข้อความ
 	local label = Instance.new("TextLabel")
-	label.Size = UDim2.new(1, -20, 0.5, 0)
-	label.Position = UDim2.new(0, 10, 0, 10)
+	label.Size = UDim2.new(1, -40, 0, 100)
+	label.Position = UDim2.new(0, 20, 0, 20)
 	label.BackgroundTransparency = 1
 	label.Text = "คุณต้องการที่จะปิดใช้งานใช่ไหม"
 	label.TextColor3 = Color3.new(1, 1, 1)
 	label.Font = Enum.Font.SourceSansBold
-	label.TextSize = 18
+	label.TextSize = 28
 	label.TextWrapped = true
+	label.TextYAlignment = Enum.TextYAlignment.Center
 	label.Parent = frame
 
 	-- ปุ่มตกลง
 	local okBtn = Instance.new("TextButton")
-	okBtn.Size = UDim2.new(0.4, -10, 0.3, 0)
-	okBtn.Position = UDim2.new(0, 9.8, 0.6, 0)
+	okBtn.Size = UDim2.new(0.48, -10, 0, 50)
+	okBtn.Position = UDim2.new(0, 20, 1, -70)
 	okBtn.Text = "ตกลง"
 	okBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
 	okBtn.TextColor3 = Color3.new(1, 1, 1)
 	okBtn.Font = Enum.Font.SourceSans
-	okBtn.TextSize = 16
+	okBtn.TextSize = 22
 	okBtn.Parent = frame
-	addCorner(okBtn, 8)
+	addCorner(okBtn, 10)
 
 	-- ปุ่มยกเลิก
 	local cancelBtn = Instance.new("TextButton")
-	cancelBtn.Size = UDim2.new(0.4, -10, 0.3, 0)
-	cancelBtn.Position = UDim2.new(0.48, 0, 0.6, 0)
+	cancelBtn.Size = UDim2.new(0.48, -10, 0, 50)
+	cancelBtn.Position = UDim2.new(0.52, 0, 1, -70)
 	cancelBtn.Text = "ยกเลิก"
 	cancelBtn.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
 	cancelBtn.TextColor3 = Color3.new(1, 1, 1)
 	cancelBtn.Font = Enum.Font.SourceSans
-	cancelBtn.TextSize = 16
+	cancelBtn.TextSize = 22
 	cancelBtn.Parent = frame
-	addCorner(cancelBtn, 8)
+	addCorner(cancelBtn, 10)
 
 	-- การคลิกยกเลิก
 	cancelBtn.MouseButton1Click:Connect(function()
@@ -148,23 +143,19 @@ closeButton.MouseButton1Click:Connect(function()
 	okBtn.MouseButton1Click:Connect(function()
 		confirmGui:Destroy()
 
-		-- ทำลาย changelogGui
 		if changelogGui and changelogGui.Parent then
 			changelogGui:Destroy()
 		end
 
-		-- ทำลาย toggleButtonGui
 		if toggleButtonGui and toggleButtonGui.Parent then
 			toggleButtonGui:Destroy()
 		end
 
-		-- ทำลาย AFKGui
 		local AFKGui = PlayerGui:FindFirstChild("AFKGui")
 		if AFKGui then
 			AFKGui:Destroy()
 		end
 
-		-- คืนค่าแสงกลับค่าเริ่มต้น
 		Lighting.GlobalShadows = true
 		pcall(function()
 			Lighting.Technology = Enum.Technology.Default
