@@ -85,9 +85,9 @@ for index, notif in ipairs(notifications) do
 	confirmGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	confirmGui.Parent = PlayerGui
 
-	-- กล่องหลัก (ขนาดใหญ่ขึ้น 2 เท่า)
+	-- กล่องหลัก
 	local frame = Instance.new("Frame")
-	frame.Size = UDim2.new(0, 500, 0, 240)
+	frame.Size = UDim2.new(0, 200, 0, 240)
 	frame.Position = UDim2.new(0.5, 0, 0.5, 0)
 	frame.AnchorPoint = Vector2.new(0.5, 0.5)
 	frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -115,7 +115,7 @@ for index, notif in ipairs(notifications) do
 	okBtn.Size = UDim2.new(0.48, -10, 0, 50)
 	okBtn.Position = UDim2.new(0, 20, 1, -70)
 	okBtn.Text = "ตกลง"
-	okBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+	okBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 	okBtn.TextColor3 = Color3.new(1, 1, 1)
 	okBtn.Font = Enum.Font.SourceSans
 	okBtn.TextSize = 22
@@ -127,7 +127,7 @@ for index, notif in ipairs(notifications) do
 	cancelBtn.Size = UDim2.new(0.48, -10, 0, 50)
 	cancelBtn.Position = UDim2.new(0.52, 0, 1, -70)
 	cancelBtn.Text = "ยกเลิก"
-	cancelBtn.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+	cancelBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 	cancelBtn.TextColor3 = Color3.new(1, 1, 1)
 	cancelBtn.Font = Enum.Font.SourceSans
 	cancelBtn.TextSize = 22
