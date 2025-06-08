@@ -87,7 +87,7 @@ for index, notif in ipairs(notifications) do
 
 	-- กล่องหลัก
 	local frame = Instance.new("Frame")
-	frame.Size = UDim2.new(0, 260, 0, 240)
+	frame.Size = UDim2.new(0, 360, 0, 240)
 	frame.Position = UDim2.new(0.5, 0, 0.5, 0)
 	frame.AnchorPoint = Vector2.new(0.5, 0.5)
 	frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
