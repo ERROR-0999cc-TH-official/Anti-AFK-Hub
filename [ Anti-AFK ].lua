@@ -95,7 +95,7 @@ closeButton.MouseButton1Click:Connect(function()
 	-- กล่องหลัก
 	local frame = Instance.new("Frame")
 	frame.Size = UDim2.new(0, 250, 0, 120)
-	frame.Position = UDim2.new(0.5, -125, 0.5, -60)
+	frame.Position = UDim2.new(0.5, -200, 0.5, -150)
 	frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 	frame.BorderSizePixel = 0
 	frame.Parent = confirmGui
@@ -118,7 +118,7 @@ closeButton.MouseButton1Click:Connect(function()
 	-- ปุ่มตกลง
 	local okBtn = Instance.new("TextButton")
 	okBtn.Size = UDim2.new(0.4, -10, 0.3, 0)
-	okBtn.Position = UDim2.new(0, 10, 0.6, 0)
+	okBtn.Position = UDim2.new(0, 9, 0.6, 0)
 	okBtn.Text = "ตกลง"
 	okBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
 	okBtn.TextColor3 = Color3.new(1, 1, 1)
@@ -130,7 +130,7 @@ closeButton.MouseButton1Click:Connect(function()
 	-- ปุ่มยกเลิก
 	local cancelBtn = Instance.new("TextButton")
 	cancelBtn.Size = UDim2.new(0.4, -10, 0.3, 0)
-	cancelBtn.Position = UDim2.new(0.5, 0, 0.6, 0)
+	cancelBtn.Position = UDim2.new(0.4, 0, 0.6, 0)
 	cancelBtn.Text = "ยกเลิก"
 	cancelBtn.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
 	cancelBtn.TextColor3 = Color3.new(1, 1, 1)
