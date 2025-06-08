@@ -68,6 +68,13 @@ for index, notif in ipairs(notifications) do
 			frame.ZIndex = 10    
 			addCorner(frame)  
 
+                        local stroke = Instance.new("UIStroke")
+        stroke.Color = Color3.fromRGB(0, 0, 0) -- สีดำ
+        stroke.Thickness = 2
+        stroke.Transparency = 0 -- ทึบ 100%
+        stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+        stroke.Parent = frame
+
 			local closeButton = Instance.new("TextButton", frame)    
 			closeButton.Text = "X"    
 			closeButton.Size = UDim2.new(0, 30, 0, 30)    
@@ -87,7 +94,7 @@ for index, notif in ipairs(notifications) do
 
 	-- กล่องหลัก
 	local frame = Instance.new("Frame")
-	frame.Size = UDim2.new(0, 360, 0, 240)
+	frame.Size = UDim2.new(0, 360, 0, 160)
 	frame.Position = UDim2.new(0.5, 0, 0.5, 0)
 	frame.AnchorPoint = Vector2.new(0.5, 0.5)
 	frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -278,6 +285,13 @@ end)
 				toggleButton.Draggable = true  
 				addCorner(toggleButton, 10)  
 
+                                local stroke = Instance.new("UIStroke")
+        stroke.Color = Color3.fromRGB(0, 0, 0) -- สีดำ
+        stroke.Thickness = 2
+        stroke.Transparency = 0 -- ทึบ 100%
+        stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+        stroke.Parent = frame
+						
 				toggleButton.MouseButton1Click:Connect(function()  
 					if changelogGui then  
 						changelogGui.Enabled = not changelogGui.Enabled  
