@@ -96,6 +96,14 @@ for index, notif in ipairs(notifications) do
 	frame.Active = true
 	frame.Draggable = true
 	addCorner(frame, 16)
+						
+        local stroke = Instance.new("UIStroke")
+        stroke.Color = Color3.fromRGB(0, 0, 0) -- สีดำ
+        stroke.Thickness = 2
+        stroke.Transparency = 0 -- ทึบ 100%
+        stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+        stroke.Parent = frame
+
 
 	-- ข้อความ
 	local label = Instance.new("TextLabel")
