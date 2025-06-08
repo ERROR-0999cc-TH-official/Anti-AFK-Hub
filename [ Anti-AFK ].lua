@@ -162,7 +162,7 @@ for index, notif in ipairs(notifications) do
 			bottomRightText.ZIndex = 10    
 			addCorner(bottomRightText)  
 
-			-- แสดงปุ่ม E หลังจาก changelog แสดงครบ 1 วิ  
+			-- แสดงปุ่ม A หลังจาก changelog แสดงครบ 1 วิ  
 			task.delay(1, function()
 				toggleButtonGui = Instance.new("ScreenGui", PlayerGui)  
 				toggleButtonGui.Name = "ToggleButtonGui"  
@@ -173,7 +173,7 @@ for index, notif in ipairs(notifications) do
 				toggleButton.Size = UDim2.new(0, 40, 0, 40)  
 				toggleButton.Position = UDim2.new(0, 10, 0, 10)  
 				toggleButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)  
-				toggleButton.Text = "E"  
+				toggleButton.Text = "A"  
 				toggleButton.TextColor3 = Color3.new(1, 1, 1)  
 				toggleButton.Font = Enum.Font.SourceSansBold  
 				toggleButton.TextSize = 24  
