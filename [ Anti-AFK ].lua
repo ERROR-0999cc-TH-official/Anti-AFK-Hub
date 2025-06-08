@@ -77,18 +77,20 @@ for index, notif in ipairs(notifications) do
 			closeButton.ZIndex = 10    
 			addCorner(closeButton)  
 			closeButton.MouseButton1Click:Connect(function()
-    -- ซ่อน changelogGui
-    changelogGui.Enabled = false
-
-    -- ซ่อน toggleButtonGui
-    if toggleButtonGui then
-        toggleButtonGui.Enabled = false
+    -- ทำลาย changelogGui
+    if changelogGui and changelogGui.Parent then
+        changelogGui:Destroy()
     end
 
-    -- ซ่อน AFKGui และ label
+    -- ทำลาย toggleButtonGui
+    if toggleButtonGui and toggleButtonGui.Parent then
+        toggleButtonGui:Destroy()
+    end
+
+    -- ทำลาย AFKGui
     local AFKGui = PlayerGui:FindFirstChild("AFKGui")
     if AFKGui then
-        AFKGui.Enabled = false
+        AFKGui:Destroy()
     end
 
     -- คืนค่าแสงกลับค่าเริ่มต้น
@@ -102,6 +104,7 @@ for index, notif in ipairs(notifications) do
     Lighting.FogEnd = 1000
     Lighting.FogColor = Color3.new(0.7, 0.7, 0.7)
 end)
+
 
 			local line = Instance.new("Frame", frame)    
 			line.Size = UDim2.new(1, -20, 0, 2)    
